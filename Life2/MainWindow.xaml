@@ -1,0 +1,27 @@
+﻿<Window x:Class="Life2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <Button Content="Reset"
+                    Command="{Binding ResetCommand}"/>
+            <Button Content="Iterate"
+                    Command="{Binding IterateCommand}"/>
+            <Button Content="Start"
+                    Command="{Binding StartCommand}"/>
+            <Button Content="Stop"
+                    Command="{Binding StopCommand}"/>
+            <TextBlock Text="{Binding Iteration}" />
+        </StackPanel>
+        <Image Grid.Column="1"
+               Width="1200"
+               Height="600"
+               Source ="{Binding WorldImage}"
+               RenderOptions.BitmapScalingMode="NearestNeighbor"/>
+    </Grid>
+</Window>

@@ -14,42 +14,29 @@ namespace Life
         private const Int32 ITERATIONS = Int32.MaxValue;
         private const Int32 WORLD_WIDTH = 111;
         private const Int32 WORLD_HEIGHT = 72;
-        private const Int32 ITERATION_INTERVAL = 100;
+        private const Int32 ITERATION_INTERVAL = 50;
 
         private static Random s_random = new Random();
 
 
         static void Main(string[] args)
         {
-            //Console.SetWindowSize(WORLD_WIDTH + 2, WORLD_HEIGHT + 3);
-            //Console.SetBufferSize(WORLD_WIDTH + 2, WORLD_HEIGHT + 3);
-
             Console.SetWindowSize(Console.LargestWindowWidth - 3, Console.LargestWindowHeight - 3);
             Console.SetBufferSize(Console.LargestWindowWidth - 3, Console.LargestWindowHeight - 3);
-            Maximize();
-            //Console.SetWindowSize(120, 70);
-            //Console.SetBufferSize(120, 70);
 
+            Maximize();
 
             Grid world = new Grid(WORLD_WIDTH, WORLD_HEIGHT);
             Seed(world);
 
-            for (Int32 iteration = 1; iteration < ITERATIONS; iteration++ )
+            for (Int32 iteration = 1; iteration < ITERATIONS; iteration++)
             {
                 world = Iterate(world);
                 Draw(iteration, world);
                 Thread.Sleep(ITERATION_INTERVAL);
-
-                //var key = Console.Read();
-                //if (key != 0)
-                //    break;
             }
-                //Draw(1, world);
-                //Thread.Sleep(1000);
-                //Seed(world);
-                //Draw(2, world);
 
-                Console.ReadLine();
+            Console.ReadLine();
         }
 
         [DllImport("user32.dll")]
@@ -94,20 +81,6 @@ namespace Life
 
             builder.AppendLine();
 
-
-
-            //for (Int32 j = 0; j < neighborGrid.Height; j++)
-            //{
-            //    builder.Append(" ");
-            //    for (Int32 i = 0; i < neighborGrid.Width; i++)
-            //    {
-            //        builder.Append(neighborGrid.Cells[i, j]);
-            //    }
-            //    builder.AppendLine();
-            //}
-
-
-
             Console.Clear();
             Console.WriteLine("===== Iteration {0:00000} =====\n", iteration);
             Console.Write(builder.ToString());
@@ -143,7 +116,7 @@ namespace Life
             switch(world.Cells[x,y])
             {
                 case 0:
-                    newCellValue = neighbors.Cells[x,y] == 3 ? 1 : 0;
+                    newCellValue = neighbors.Cells[x,y] == 3 || neighbors.Cells[x,y] == 6 ? 1 : 0;
                     break;
                 case 1:
                     newCellValue = neighbors.Cells[x, y] == 2 || neighbors.Cells[x, y] == 3 ? 1 : 0;
